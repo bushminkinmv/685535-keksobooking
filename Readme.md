@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
-* Студент: [Неопознанный енот](https://up.htmlacademy.ru/javascript/13/user/685535).
-* Наставник: `Неизвестно`.
+* Студент: [Максим Бушминкин](https://up.htmlacademy.ru/javascript/13/user/685535).
+* Наставник: `Валерий Заочный`.
 
 ---
 
