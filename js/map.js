@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var MAX_LOCATIONS = 8;
 var PRICE_MIN = 1000;
@@ -124,19 +124,19 @@ var createCardsOnMap = function () {
     mapCard.getElementsByClassName('popup__text--address')[0].textContent = nearbyLocations[i].offer.address;
     mapCard.getElementsByClassName('popup__text--price')[0].textContent = nearbyLocations[i].offer.price + '₽/ночь';
     switch (nearbyLocations[i].offer.type) {
-      case 'flat':
-          mapCard.getElementsByClassName('popup__type')[0].textContent = 'Квартира';
-          break;
-      case 'bungalo':
-          mapCard.getElementsByClassName('popup__type')[0].textContent = 'Бунгало';
-          break;
-      case 'house':
-          mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дом';
-          break;
-      case 'palace':
-          mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дворец';
-          break;
-    }
+    case 'flat':
+        mapCard.getElementsByClassName('popup__type')[0].textContent = 'Квартира';
+        break;
+    case 'bungalo':
+        mapCard.getElementsByClassName('popup__type')[0].textContent = 'Бунгало';
+        break;
+    case 'house':
+        mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дом';
+        break;
+    case 'palace':
+        mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дворец';
+        break;
+  }
 
     mapCard.getElementsByClassName('popup__text--capacity')[0].textContent = nearbyLocations[i].offer.rooms + ' комнаты для ' + nearbyLocations[i].offer.guests + ' гостей';
 
@@ -164,8 +164,6 @@ var createCardsOnMap = function () {
     document.getElementsByClassName('map__filters-container')[0].appendChild(mapCard);
   }
 };
-
-
 
 createCardsOnMap();
 
