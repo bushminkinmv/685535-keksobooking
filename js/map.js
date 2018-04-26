@@ -1,3 +1,5 @@
+'use strict'
+
 var MAX_LOCATIONS = 8;
 var PRICE_MIN = 1000;
 var PRICE_MAX = 1000000;
@@ -14,8 +16,8 @@ var allFeatures = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'condi
 var nearbyLocations = [];
 
 var getRndInteger = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
 var getRndTitle = function (arr) {
@@ -25,8 +27,10 @@ var getRndTitle = function (arr) {
   return choosenElement;
 };
 
-var shuffleElem = function(arr) {
-  var j, x, i;
+var shuffleElem = function (arr) {
+  var j;
+  var x;
+  var i;
   for (i = arr.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
     x = arr[i];
@@ -36,11 +40,11 @@ var shuffleElem = function(arr) {
   return arr;
 };
 
-var getRndElement = function(arr) {
+var getRndElement = function (arr) {
   return arr[getRndInteger(0, arr.length - 1)];
 };
 
-var getRndArrElm = function(arr) {
+var getRndArrElm = function (arr) {
   var tempArr = [];
   var startPos = getRndInteger(0, arr.length - 1);
   var j = 0;
@@ -49,39 +53,39 @@ var getRndArrElm = function(arr) {
     j++;
   }
   return tempArr;
-}
+};
 
-var generateObjects = function(i) {
-    var locationData = {
-      "author": {
-        "avatar": 'img/avatars/user0' + i + '.png'
-      },
-
-      "offer": {
-      "title": getRndTitle(titles),
-      "address": '',
-      "price": getRndInteger(PRICE_MIN, PRICE_MAX),
-      "type": getRndElement(allTypes),
-      "rooms": getRndInteger(1, ROOMS_MAX),
-      "guests": getRndInteger(1, GUESTS_MAX),
-      "checkin": getRndElement(checkTimes),
-      "checkout": getRndElement(checkTimes),
-      "features": getRndArrElm(allFeatures),
-      "description": '',
-      "photos": shuffleElem(photos)
+var generateObjects = function (i) {
+  var locationData = {
+    'author': {
+      'avatar': 'img/avatars/user0' + i + '.png'
     },
 
-      "location": {
-        "x": getRndInteger(MAP_MIN_COORDS_X, MAP_MAX_COORDS_X),
-        "y": getRndInteger(MAP_MIN_COORDS_Y, MAP_MAX_COORDS_X)
+    'offer': {
+      'title': getRndTitle(titles),
+      'address': '',
+      'price': getRndInteger(PRICE_MIN, PRICE_MAX),
+      'type': getRndElement(allTypes),
+      'rooms': getRndInteger(1, ROOMS_MAX),
+      'guests': getRndInteger(1, GUESTS_MAX),
+      'checkin': getRndElement(checkTimes),
+      'checkout': getRndElement(checkTimes),
+      'features': getRndArrElm(allFeatures),
+      'description': '',
+      'photos': shuffleElem(photos)
+    },
+
+    'location': {
+      'x': getRndInteger(MAP_MIN_COORDS_X, MAP_MAX_COORDS_X),
+      'y': getRndInteger(MAP_MIN_COORDS_Y, MAP_MAX_COORDS_Y)
     }
-  }
+  };
 
   locationData.offer.address = '"' + locationData.location.x + ', ' + locationData.location.y + '"';
   return locationData;
 };
 
-var getNerbyLocations = function() {
+var getNerbyLocations = function () {
   for (var i = 1; i <= MAX_LOCATIONS; i++) {
     var loc = generateObjects(i);
     nearbyLocations.push(loc);
@@ -90,26 +94,28 @@ var getNerbyLocations = function() {
 
 getNerbyLocations();
 
-var createPinsOnMap = function() {
-  var item, temp;
+var createPinsOnMap = function () {
+  var item;
+  var temp;
   temp = document.getElementsByTagName('template')[0];
   item = temp.content.querySelector('.map__pin');
   for (var i = 0; i < nearbyLocations.length; i++) {
-   var mapPin = item.cloneNode(true);
-   var pinWidth = window.getComputedStyle(mapPin, null).width;
-   var pinHeight = window.getComputedStyle(mapPin, null).height;
-   mapPin.style.left = nearbyLocations[i].location.x - pinWidth/2 + 'px';
-   mapPin.style.top = nearbyLocations[i].location.y - pinHeight/2 + 'px';
-   mapPin.getElementsByTagName('img')[0].src = nearbyLocations[i].author.avatar;
-   mapPin.getElementsByTagName('img')[0].alt = nearbyLocations[i].offer.title;
-   document.getElementsByClassName('map__pins')[0].appendChild(mapPin);
+    var mapPin = item.cloneNode(true);
+    var pinWidth = window.getComputedStyle(mapPin, null).width;
+    var pinHeight = window.getComputedStyle(mapPin, null).height;
+    mapPin.style.left = nearbyLocations[i].location.x - pinWidth / 2 + 'px';
+    mapPin.style.top = nearbyLocations[i].location.y - pinHeight / 2 + 'px';
+    mapPin.getElementsByTagName('img')[0].src = nearbyLocations[i].author.avatar;
+    mapPin.getElementsByTagName('img')[0].alt = nearbyLocations[i].offer.title;
+    document.getElementsByClassName('map__pins')[0].appendChild(mapPin);
   }
 };
 
 createPinsOnMap();
 
-var createCardsOnMap = function() {
-  var item, temp;
+var createCardsOnMap = function () {
+  var item;
+  var temp;
   temp = document.getElementsByTagName('template')[0];
   item = temp.content.querySelector('.map__card');
   for (var i = 0; i < nearbyLocations.length; i++) {
@@ -140,7 +146,6 @@ var createCardsOnMap = function() {
       mapCard.getElementsByClassName('popup__features')[0].textContent += ' ' + nearbyLocations[i].offer.features[j];
     }
     mapCard.getElementsByClassName('popup__description')[0].textContent = nearbyLocations[i].offer.description;
-
 
 
     var photoBlock = mapCard.getElementsByClassName('popup__photos')[0];
