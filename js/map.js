@@ -124,16 +124,16 @@ var createCardsOnMap = function () {
     mapCard.getElementsByClassName('popup__text--address')[0].textContent = nearbyLocations[i].offer.address;
     mapCard.getElementsByClassName('popup__text--price')[0].textContent = nearbyLocations[i].offer.price + '₽/ночь';
     switch (nearbyLocations[i].offer.type) {
-    case 'flat':
+      case 'flat':
         mapCard.getElementsByClassName('popup__type')[0].textContent = 'Квартира';
         break;
-    case 'bungalo':
+      case 'bungalo':
         mapCard.getElementsByClassName('popup__type')[0].textContent = 'Бунгало';
         break;
-    case 'house':
+      case 'house':
         mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дом';
         break;
-    case 'palace':
+      case 'palace':
         mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дворец';
         break;
   }
@@ -150,7 +150,7 @@ var createCardsOnMap = function () {
 
     var photoBlock = mapCard.getElementsByClassName('popup__photos')[0];
     var imgBlock = photoBlock.getElementsByTagName('img')[0];
-    for (var j = 0; j < photos.length; j++) {
+    for (j = 0; j < photos.length; j++) {
       var apartPhoto = imgBlock.cloneNode(true);
       apartPhoto.src = nearbyLocations[i].offer.photos[j];
       photoBlock.appendChild(apartPhoto);
