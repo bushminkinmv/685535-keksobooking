@@ -136,7 +136,7 @@ var createCardsOnMap = function () {
       case 'palace':
         mapCard.getElementsByClassName('popup__type')[0].textContent = 'Дворец';
         break;
-  }
+    }
 
     mapCard.getElementsByClassName('popup__text--capacity')[0].textContent = nearbyLocations[i].offer.rooms + ' комнаты для ' + nearbyLocations[i].offer.guests + ' гостей';
 
