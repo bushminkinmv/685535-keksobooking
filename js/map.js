@@ -102,7 +102,7 @@ var createPinsOnMap = function () {
     var pinWidth = window.getComputedStyle(mapPin, null).width;
     var pinHeight = window.getComputedStyle(mapPin, null).height;
     mapPin.style.left = nearbyLocations[i].location.x - pinWidth / 2 + 'px';
-    mapPin.style.top = nearbyLocations[i].location.y - pinHeight / 2 + 'px';
+    mapPin.style.top = nearbyLocations[i].location.y - pinHeight + 'px';
     mapPin.getElementsByTagName('img')[0].src = nearbyLocations[i].author.avatar;
     mapPin.getElementsByTagName('img')[0].alt = nearbyLocations[i].offer.title;
     document.getElementsByClassName('map__pins')[0].appendChild(mapPin);
@@ -139,8 +139,14 @@ var createCardsOnMap = function (i) {
 
   mapCard.getElementsByClassName('popup__text--time')[0].textContent = 'Заезд после ' + nearbyLocations[i].offer.checkin + ', выезд до ' + nearbyLocations[i].offer.checkout;
 
+  var featureNode = mapCard.getElementsByClassName('popup__features')[0];
+  while (featureNode.firstChild) {
+    featureNode.removeChild(featureNode.firstChild);
+  }
   for (var j = 0; j < nearbyLocations[i].offer.features.length; j++) {
-    mapCard.getElementsByClassName('popup__features')[0].textContent += ' ' + nearbyLocations[i].offer.features[j];
+    var featureElem = document.createElement('li');
+    featureElem.className = 'popup__feature popup__feature--' + nearbyLocations[i].offer.features[j];
+    featureNode.appendChild(featureElem);
   }
   mapCard.getElementsByClassName('popup__description')[0].textContent = nearbyLocations[i].offer.description;
 
